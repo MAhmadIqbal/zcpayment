@@ -1,7 +1,6 @@
 
 const express = require('express')
 const app = express()
-const httpStatus=require('http-status')
 require('dotenv').config()
 const cors = require('cors')
 
