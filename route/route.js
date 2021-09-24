@@ -1,7 +1,7 @@
 
 const express = require('express')
 const router = express.Router()
-const util = require('../util')        
+const util = require('../util/util')        
     //-------Endpoints-Starts-------------------------
 // just locally have file and get request will give response back with file to client
 const validation=async function(req,res,next){
