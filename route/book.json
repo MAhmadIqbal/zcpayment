@@ -1,12 +1,16 @@
 {
-    "name": "Moving On",
     "description": "NFT based book 'Moving On' by J.L Caban",
     "external_url": "https://gateway.pinata.cloud/ipfs/Qmb5YuBxs5U5m6jtQqz5JRRy4wKFdQS2K4N238zH6ve2YU",
     "image": "https://gateway.pinata.cloud/ipfs/QmTTyieMY4Wn2FNHF5TMZk8xKXH5pmdyXJhqTR521WoSbY",
+    "name": "Moving On",
     "attributes": [
         {
-            "author":"J.L Caban",
-            "pages":"113"
+            "trait_type":"author",
+            "value":"J.L Caban"
+        },
+        {
+            "trait_type": "Pages", 
+            "value": 113
         }
     ]
 }
