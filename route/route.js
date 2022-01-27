@@ -1,24 +1,32 @@
 
 const express = require('express')
 const router = express.Router()
-const util = require('../util/util')        
+const soapRequest = require('easy-soap-request');
+const fs = require('fs');    
+const xmlparser = require('express-xml-bodyparser');
+var o2x = require('object-to-xml');
+ router.use(xmlparser());
     //-------Endpoints-Starts-------------------------
-// just locally have file and get request will give response back with file to client
-const validation=async function(req,res,next){
-    const indexvalue = parseInt(req.params.index)
-    console.log("index value:",typeof indexvalue)
-        if(indexvalue == 0){
-            console.log('Error due to 0 value')
-            res.status(401).send('router must not equal to 0 in value')
-        }else if(indexvalue > 50000){
-            console.log('Error due to exceeding value')
-            res.status(401).send('route must have value within 50000 in last')    
-        }else{
-            next();     
-        }
-}
-router.get('/file1/:index',validation, util.fileSend)
-// Route which return the another file with 25000 limit
-router.get('/file2/:index',validation,util.fileSendother)
+// just have req.body and get request will give response back with file to client
+
+router.post('/request',async (req,res) => {
+  // example data
+  try{
+  const url = req.query.url
+  const bodyxml = o2x(req.body)
+  // const url = 'https://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php';
+  console.log('Its url=> ',url);
+  console.log('Its XML-body => ',bodyxml);
+  // const xml = fs.readFileSync('test/zipCodeEnvelope.xml', 'utf-8');
+  const sampleHeaders = {
+    'Content-Type': 'text/xml;charset=UTF-8',
+  };
+  // usage of module
+  const { response } =await soapRequest({ url: url, headers: sampleHeaders, xml: bodyxml, timeout: 10000 })
+        res.status(200).json({message:'Successfull', 'data':response})
+}catch(err){
+    res.status(500).send({message:'Server Error in sending Request!',err});
+  }; // Optional timeout parameter(milliseconds)
+})
 
 module.exports=  router;

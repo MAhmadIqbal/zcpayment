@@ -1,5 +1,5 @@
 {
-  "name": "routerreturnfile",
+  "name": "zc-payment",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -15,10 +15,14 @@
     "nodemon": "^2.0.12"
   },
   "dependencies": {
+    "body-parser-xml": "^2.0.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
+    "easy-soap-request": "^4.6.0",
     "express": "^4.17.1",
+    "express-xml-bodyparser": "^0.3.0",
     "http-status": "^1.5.0",
+    "object-to-xml": "^2.0.0",
     "path": "^0.12.7"
   }
 }
