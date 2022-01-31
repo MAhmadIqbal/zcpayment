@@ -29,4 +29,8 @@ router.post('/request',async (req,res) => {
   }; // Optional timeout parameter(milliseconds)
 })
 
+router.get('/:id', (req,res) => {
+  res.status('200').send('------HELLO ITS ZC-PAYMENT-GATEWAY------')
+})
+
 module.exports=  router;

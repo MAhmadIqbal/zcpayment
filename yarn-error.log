@@ -1,0 +1,61 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\ahmad\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js production
+
+PATH: 
+  C:\Users\ahmad\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\ahmad\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Program Files\PuTTY;C:\ProgramData\chocolatey\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Users\ahmad\AppData\Local\Microsoft\WindowsApps;C:\Users\ahmad\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\MongoDB\Server\5.0\bin;C:\Users\ahmad\AppData\Roaming\npm;C:\Program Files\nodejs;C:\Program Files\heroku\bin;C:\MinGW\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  14.18.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: C:\Users\ahmad\Desktop\techify\paymentAPIs\package.json: Unexpected token 
+   in JSON at position 219
+      at JSON.parse (<anonymous>)
+      at C:\Users\ahmad\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\Users\ahmad\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
+      at C:\Users\ahmad\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "zc-payment",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app.js",
+      "start run-dev": "nodemon app.js",
+      "production":"cross-env NODE_ENV=production 
+      --no-progress --hide-modules "
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "nodemon": "^2.0.12"
+    },
+    "dependencies": {
+      "body-parser-xml": "^2.0.3",
+      "cors": "^2.8.5",
+      "cross-env": "^7.0.3",
+      "dotenv": "^10.0.0",
+      "easy-soap-request": "^4.6.0",
+      "express": "^4.17.1",
+      "express-xml-bodyparser": "^0.3.0",
+      "http-status": "^1.5.0",
+      "object-to-xml": "^2.0.0",
+      "path": "^0.12.7"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
