@@ -23,9 +23,11 @@ router.post('/request',async (req,res) => {
   };
   // usage of module
   const { response } =await soapRequest({ url: url, headers: sampleHeaders, xml: bodyxml, timeout: 10000 })
+  console.log(response);
         res.status(200).json({message:'Successfull', 'data':response})
 }catch(err){
     res.status(500).send({message:'Server Error in sending Request!',err});
+    console.log(err);
   }; // Optional timeout parameter(milliseconds)
 })
 
