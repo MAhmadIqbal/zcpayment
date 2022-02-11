@@ -38,20 +38,22 @@ router.post('/request',async (req,res) => {
 router.post('/hit',async (req,res)=>{
   console.log('In hit req');
   const url = req.query.url
-  console.log(url);
+  console.log("Its URL: >>"+url);
   const xmls = o2x(req.body)
-  console.log(xmls);
+  console.log("Its xmls: >>"+xmls);
   await axios.post(url,
            xmls,
            {headers:
              {'Content-Type': 'text/xml'}
            }).then(res=>{
-             console.log(res);
+             console.log("-----------------------------------Its Response",res);
              res.status(200).json({message:'Successfull', 'data':res});
-            }).catch(err=>{
-              console.log(err)})
+            }).catch((err)=>{
+              console.log(err)
               res.status(500).send({message:'Server Error in sending Request!',err});
+            })
 })
+
 router.get('/', (req,res) => {
   console.log('Its changed now');
   res.status('200').send('------HELLO ITS ZC-PAYMENT-GATEWAY------')
