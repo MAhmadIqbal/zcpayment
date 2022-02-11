@@ -4,6 +4,7 @@ const router = express.Router()
 const soapRequest = require('easy-soap-request');
 const fs = require('fs');    
 const xmlparser = require('express-xml-bodyparser');
+const axios = require('axios');
 var o2x = require('object-to-xml');
  router.use(xmlparser());
     //-------Endpoints-Starts-------------------------
@@ -30,7 +31,18 @@ router.post('/request',async (req,res) => {
     res.status(500).send({message:'Server Error in sending Request!',error});
   }; // Optional timeout parameter(milliseconds)
 })
-
+router.post('/hit',async (req,res)=>{
+  console.log('In hit req');
+  const xmls = o2x(req.body)
+  console.log(xmls);
+  await axios.post('http://www.webservicex.com/CurrencyConvertor.asmx?wsdl',
+           xmls,
+           {headers:
+             {'Content-Type': 'text/xml'}
+           }).then(res=>{
+             console.log(res);
+           }).catch(err=>{console.log(err)})
+})
 router.get('/', (req,res) => {
   console.log('Its changed now');
   res.status('200').send('------HELLO ITS ZC-PAYMENT-GATEWAY------')
