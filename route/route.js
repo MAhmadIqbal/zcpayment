@@ -32,6 +32,7 @@ router.post('/request',async (req,res) => {
 })
 
 router.get('/', (req,res) => {
+  console.log('Its changed now');
   res.status('200').send('------HELLO ITS ZC-PAYMENT-GATEWAY------')
 })
 
