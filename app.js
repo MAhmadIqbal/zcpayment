@@ -14,7 +14,6 @@ app.use(morgan('dev'));
 
 // enable cors
 app.use(cors());
-app.options('*', cors());
 
 //parse requset
 // app.use(bodyParser.xml());
