@@ -25,9 +25,9 @@ router.post('/request',async (req,res) => {
   const { response } =await soapRequest({ url: url, headers: sampleHeaders, xml: bodyxml, timeout: 10000 })
   console.log(response);
         res.status(200).json({message:'Successfull', 'data':response})
-}catch(err){
-    res.status(500).send({message:'Server Error in sending Request!',err});
-    console.log(err);
+}catch(error){
+  console.log("catch Error: ",error);
+    res.status(500).send({message:'Server Error in sending Request!',error});
   }; // Optional timeout parameter(milliseconds)
 })
 
