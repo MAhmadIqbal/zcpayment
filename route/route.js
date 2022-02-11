@@ -33,9 +33,11 @@ router.post('/request',async (req,res) => {
 })
 router.post('/hit',async (req,res)=>{
   console.log('In hit req');
+  const url = req.query.url
+  console.log(url);
   const xmls = o2x(req.body)
   console.log(xmls);
-  await axios.post('http://www.webservicex.com/CurrencyConvertor.asmx?wsdl',
+  await axios.post(url,
            xmls,
            {headers:
              {'Content-Type': 'text/xml'}
