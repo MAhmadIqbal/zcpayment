@@ -31,6 +31,10 @@ router.post('/request',async (req,res) => {
     res.status(500).send({message:'Server Error in sending Request!',error});
   }; // Optional timeout parameter(milliseconds)
 })
+
+
+
+          // -------------------------------HIT WITH AXIOS------------------------------ //
 router.post('/hit',async (req,res)=>{
   console.log('In hit req');
   const url = req.query.url
@@ -43,7 +47,10 @@ router.post('/hit',async (req,res)=>{
              {'Content-Type': 'text/xml'}
            }).then(res=>{
              console.log(res);
-           }).catch(err=>{console.log(err)})
+             res.status(200).json({message:'Successfull', 'data':res});
+            }).catch(err=>{
+              console.log(err)})
+              res.status(500).send({message:'Server Error in sending Request!',err});
 })
 router.get('/', (req,res) => {
   console.log('Its changed now');
