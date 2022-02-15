@@ -40,6 +40,36 @@ router.post('/hit',async (req,res)=>{
   const url = req.query.url
   console.log("Its URL: >>"+url);
   const xmls = o2x(req.body)
+  var xmlbody = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:zcp="http://zcstgpublic.jo.zain.com:5001/ZCPublicVPNAPI.svc" xmlns:ent="http://schemas.datacontract.org/2004/07/Entities" xmlns:ent1="http://schemas.datacontract.org/2004/07/Entities.Common" xmlns:ent2="http://schemas.datacontract.org/2004/07/Entities.Auth">\
+  <soapenv:Header/>\
+  <soapenv:Body>\
+      <zcp:ZCInitiateMerchDebitPayByMerch>\
+          <!--Optional:-->\
+          <zcp:req>\
+              <ent:Amount>25</ent:Amount>\
+              <ent:MSISDN962>96798257523</ent:MSISDN962>\
+          </zcp:req>\
+          <!--Optional:-->\
+          <zcp:generalData>\
+              <!--type: LanguageID - enumeration: [English,Arabic]-->\
+              <ent1:LanguageID>English</ent1:LanguageID>\
+              <!--type: string-->\
+              <ent1:TerminalShopID>1</ent1:TerminalShopID>\
+              <!--type: string-->\
+              <ent1:TerminalUserID>1</ent1:TerminalUserID>\
+          </zcp:generalData>\
+          <!--Optional:-->\
+          <zcp:AuthData>\
+              <!--type: string-->\
+              <ent2:Password>ZC@T$F!S@B21</ent2:Password>\
+              <!--type: SharedInfo.API_IDS - enumeration: [ZCRegisterWallet,ZCAgentCashIn,ZCAgentInitiateCashOut,ZCAgentCashOut,ZCBusinessToPersonSalary,ZCBusinessToPersonLoan,ZCCorporateBalanceInquiry,ZCGetCorporateTransactions,ZCGetNationalities,ZCGetCities,ZCGetIDType,ZCIsMSISDNAssociatedToNID,ZCInitiateMerchDebitPayByMerch,ZCMerchDebitTrigerPayment,ZCGetCorporateSOA,ZCGetCorpTrans]-->\
+              <ent2:ServiceID>ZCInitiateMerchDebitPayByMerch</ent2:ServiceID>\
+              <!--type: string-->\
+              <ent2:UserName>80105</ent2:UserName>\
+          </zcp:AuthData>\
+      </zcp:ZCInitiateMerchDebitPayByMerch>\
+  </soapenv:Body>\
+</soapenv:Envelope>'
   console.log("Its xmls: >>"+xmls);
   await axios.post(url,
            xmls,
