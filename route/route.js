@@ -72,7 +72,7 @@ router.post('/hit',async (req,res)=>{
 </soapenv:Envelope>'
   console.log("Its xmls: >>"+xmls);
   await axios.post(url,
-           xmls,
+    xmlbody,
            {headers:
              {'Content-Type': 'text/xml'}
            }).then(res=>{
