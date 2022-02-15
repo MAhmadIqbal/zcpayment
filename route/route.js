@@ -12,11 +12,11 @@ var o2x = require('object-to-xml');
 
 router.post('/request',async (req,res) => {
   // example data
-  try{
+  // try{
   const url = req.query.url
   const bodyxml = o2x(req.body)
-  // const url = 'https://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php';
   console.log('Its url=> ',url);
+  console.log('-------------------------------------------------------------------------------------');
   console.log('Its XML-body => ',bodyxml);
   // const xml = fs.readFileSync('test/zipCodeEnvelope.xml', 'utf-8');
   const sampleHeaders = {
@@ -24,12 +24,18 @@ router.post('/request',async (req,res) => {
   };
   // usage of module
   const { response } =await soapRequest({ url: url, headers: sampleHeaders, xml: bodyxml, timeout: 10000 })
-  console.log(response);
-        res.status(200).json({message:'Successfull', 'data':response})
-}catch(error){
-  console.log("catch Error: ",error);
-    res.status(500).send({message:'Server Error in sending Request!',error});
-  }; // Optional timeout parameter(milliseconds)
+  const { headers, body, statusCode } = response;
+  console.log('--------------------------------HEADERS-----------------------------');
+  console.log(headers);
+  console.log('--------------------------------BODY--------------------------------');
+  console.log(body);
+  console.log('--------------------------------STATUSCODE-----------------------------');
+  console.log(statusCode);
+        res.status(200).json({message:'Successfully send request with data below', 'headers':headers,"body":body,"statusCode":statusCode})
+// }catch(error){
+//   console.log("catch Error: ",error);
+//     res.status(500).send({message:'Server Error in sending Request!',error});
+//   }; // Optional timeout parameter(milliseconds)
 })
 
 
