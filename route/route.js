@@ -6,13 +6,14 @@ const fs = require('fs');
 const xmlparser = require('express-xml-bodyparser');
 const axios = require('axios');
 var o2x = require('object-to-xml');
+const axios = require('axios-https-proxy-fix');
  router.use(xmlparser());
     //-------Endpoints-Starts-------------------------
 // just have req.body and get request will give response back with file to client
 
 router.post('/request',async (req,res) => {
   // example data
-  // try{
+  try{
   const url = req.query.url
   const bodyxml = o2x(req.body)
   console.log('Its url=> ',url);
@@ -24,7 +25,7 @@ router.post('/request',async (req,res) => {
   };
   // usage of module
   const { response } =await soapRequest({ url: url, headers: sampleHeaders, xml: bodyxml, timeout: 10000 })
-  const { headers, body, statusCode } = response;
+  const { headers, body, statusCode } = await response;
   console.log('--------------------------------HEADERS-----------------------------');
   console.log(headers);
   console.log('--------------------------------BODY--------------------------------');
@@ -32,10 +33,10 @@ router.post('/request',async (req,res) => {
   console.log('--------------------------------STATUSCODE-----------------------------');
   console.log(statusCode);
         res.status(200).json({message:'Successfully send request with data below', 'headers':headers,"body":body,"statusCode":statusCode})
-// }catch(error){
-//   console.log("catch Error: ",error);
-//     res.status(500).send({message:'Server Error in sending Request!',error});
-//   }; // Optional timeout parameter(milliseconds)
+}catch(error){
+  console.log("catch Error: ",error);
+    res.status(500).send({message:'Server Error in sending Request!',error});
+  }; // Optional timeout parameter(milliseconds)
 })
 
 
@@ -95,4 +96,37 @@ router.get('/', (req,res) => {
   res.status('200').send('------HELLO ITS ZC-PAYMENT-GATEWAY------')
 })
 
+
+router.post('method',async(req,res)=>{
+  const URL = req.query.url;
+  const xmls = o2x(req.body);
+  const requestResponse = new Promise((resolve, reject) => {
+    axios({
+      method: 'post',
+      url:URL,
+      headers:{},
+      data: xmls,
+      timeout:10000,
+      proxy:false
+    }).then((response) => {
+      resolve({
+        response: {
+          headers: response.headers,
+          body: response.data,
+          statusCode: response.status,
+        },
+      });
+      console.log("its response ====>>>",response);
+    }).catch((error) => {
+      if (error.response) {
+        console.error(`SOAP FAIL: ${error}`);
+        reject(error.response.data);
+      } else {
+        console.error(`SOAP FAIL: ${error}`);
+        reject(error);
+      }
+    });
+  });
+  soapRequest();
+})
 module.exports=  router;
