@@ -5,8 +5,8 @@ const soapRequest = require('easy-soap-request');
 const fs = require('fs');    
 const xmlparser = require('express-xml-bodyparser');
 const axios = require('axios');
-var o2x = require('object-to-xml');
-const axios = require('axios-https-proxy-fix');
+const o2x = require('object-to-xml');
+const axioshttps = require('axios-https-proxy-fix');
  router.use(xmlparser());
     //-------Endpoints-Starts-------------------------
 // just have req.body and get request will give response back with file to client
@@ -97,11 +97,11 @@ router.get('/', (req,res) => {
 })
 
 
-router.post('method',async(req,res)=>{
+router.post('/method',async(req,res)=>{
   const URL = req.query.url;
   const xmls = o2x(req.body);
   const requestResponse = new Promise((resolve, reject) => {
-    axios({
+    axioshttps({
       method: 'post',
       url:URL,
       headers:{},
