@@ -24,7 +24,10 @@ router.post('/request',async (req,res) => {
     'Content-Type': 'text/xml;charset=UTF-8',
   };
   // usage of module
-  const { response } =await soapRequest({ url: url, headers: sampleHeaders, xml: bodyxml, timeout: 10000 })
+  const { response } =await soapRequest({ url: url, headers: sampleHeaders, xml: bodyxml, timeout: 100000 }).then(result =>{
+    console.log("its then block",result);
+    return result;
+  }).catch(err=>console.log("Its error block",err));
   const { headers, body, statusCode } = await response;
   console.log('--------------------------------HEADERS-----------------------------');
   console.log(headers);
@@ -99,6 +102,7 @@ router.get('/', (req,res) => {
 
 router.post('/method',async(req,res)=>{
   const URL = req.query.url;
+  console.log("its url received from query",URL);
   const xmls = o2x(req.body);
   const requestResponse = new Promise((resolve, reject) => {
     axioshttps({
@@ -127,6 +131,5 @@ router.post('/method',async(req,res)=>{
       }
     });
   });
-  soapRequest();
 })
 module.exports=  router;
